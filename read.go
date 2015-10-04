@@ -3,7 +3,6 @@ package main
 import (
 	"crypto/rc4"
 	"github.com/andrewburian/stegoimg"
-	"fmt"
 	"io"
 )
 
@@ -14,7 +13,6 @@ func read_stego(img io.Reader, secret string, out io.Writer) {
 	var crypt *rc4.Cipher
 
 	if secret != "" {
-		fmt.Println("Encrypting data with AES")
 		encrypt = true
 		var err error
 		crypt, err = rc4.NewCipher([]byte(secret))

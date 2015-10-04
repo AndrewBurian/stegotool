@@ -2,8 +2,8 @@ package main
 
 import (
 	"crypto/rc4"
-	"github.com/andrewburian/stegoimg"
 	"fmt"
+	"github.com/andrewburian/stegoimg"
 	"io"
 )
 
@@ -14,7 +14,6 @@ func write_stego(img, data io.Reader, secret string, out io.Writer) {
 	var crypt *rc4.Cipher
 
 	if secret != "" {
-		fmt.Println("Encrypting data with AES")
 		encrypt = true
 		var err error
 		crypt, err = rc4.NewCipher([]byte(secret))
@@ -28,7 +27,6 @@ func write_stego(img, data io.Reader, secret string, out io.Writer) {
 
 	// get a buffer to read data from the data
 	buf := make([]byte, 128)
-
 
 	// create the new stego img writer to encode the data
 	stegoWriter, err := stegoimg.NewStegoImgWriter(img, out)

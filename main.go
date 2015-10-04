@@ -1,10 +1,10 @@
 package main
 
 import (
-	"os"
-	"fmt"
 	"flag"
+	"fmt"
 	"io"
+	"os"
 )
 
 func main() {
@@ -45,20 +45,22 @@ func main() {
 	}
 
 	// variables
-	var img, data io.Reader
-	var out io.Writer
+	var img, data io.ReadCloser
+	var out io.WriteCloser
+	var err error
 
 	// open the source image
-	img, err := os.Open(*imgfile)
+	img, err = os.Open(*imgfile)
 	if err != nil {
 		panic(err)
 	}
+	defer img.Close()
 
 	// open the output
 	if *outfile == "stdout" {
 		out = os.Stdout
 	} else {
-		out, err := os.Open(*outfile)
+		out, err = os.Create(*outfile)
 		if err != nil {
 			panic(err)
 		}
@@ -69,7 +71,7 @@ func main() {
 	if *datafile == "stdin" {
 		data = os.Stdin
 	} else {
-		data, err := os.Open(*datafile)
+		data, err = os.Open(*datafile)
 		if err != nil {
 			panic(err)
 		}
@@ -88,4 +90,3 @@ func main() {
 	return
 
 }
-
