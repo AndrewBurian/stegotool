@@ -89,8 +89,3 @@ func main() {
 
 }
 
-
-func read_stego(img io.Reader, secret string, out io.Writer) {
-
-	return
-}
